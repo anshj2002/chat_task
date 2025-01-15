@@ -6,3 +6,6 @@ class ChatMessage(models.Model):
     recipient = models.ForeignKey(User, related_name='recipient', on_delete=models.CASCADE)
     message = models.TextField()
     timestamp = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"{self.sender} to {self.recipient}: {self.message[:20]}"

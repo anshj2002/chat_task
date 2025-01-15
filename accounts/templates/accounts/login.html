@@ -1,22 +1,10 @@
-{% extends 'base.html' %}
-
-{% block title %}Login{% endblock %}
-
-{% block content %}
-<h2>Login</h2>
-
 <form method="POST" action="{% url 'login' %}">
     {% csrf_token %}
     <label for="username">Username:</label>
     <input type="text" id="username" name="username" required><br><br>
 
     <label for="password">Password:</label>
-    <input type="password" id="password" name="password" required><br><br>
+    <input type="password" id="password" name="password" required><br><br>  <!-- Change name here to 'password' -->
 
     <button type="submit">Login</button>
 </form>
-
-{% if form.errors %}
-    <p>Invalid username or password. Please try again.</p>
-{% endif %}
-{% endblock %}

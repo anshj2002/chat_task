@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block title %}Home{% endblock %}
+
+{% block content %}
+    <h2>Welcome, {{ user.username }}!</h2>
+    <p>This is your dashboard. Here you can manage your account, chat with others, and more.</p>
+
+    <div>
+        <h3>Start Chatting</h3>
+        <p>Click on any username in the left menu to start chatting!</p>
+    </div>
+{% endblock %}

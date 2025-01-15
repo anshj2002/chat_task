@@ -9,14 +9,14 @@ from .models import ChatMessage
 
 def signup(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
-        confirm_password = request.POST['confirm_password']
-        email = request.POST['email']
+        
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        confirm_password = request.POST.get('confirm_password')
         
         if password == confirm_password:
             try:
-                user = User.objects.create_user(username=username, password=password, email=email)
+                user = User.objects.create_user(username=username, password=password)
                 user.save()
                 login(request, user)  # Automatically log in the user after registration
                 return redirect('home')  # Redirect to a home page or dashboard
@@ -28,14 +28,17 @@ def signup(request):
 
 def login_view(request):
     if request.method == 'POST':
-        username = request.POST['username']
-        password = request.POST['password']
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+        
         user = authenticate(request, username=username, password=password)
+        
         if user is not None:
             login(request, user)
-            return redirect('home')  # Redirect to a home page or dashboard
+            return redirect('home')  # Redirect to the home page or dashboard
         else:
             messages.error(request, 'Invalid username or password.')
+    
     return render(request, 'accounts/login.html')
 
 @login_required
@@ -48,11 +51,17 @@ def get_all_users(request):
 @login_required
 def chat_view(request, recipient_id):
     recipient = get_object_or_404(User, id=recipient_id)
-    if request.method == 'POST':
-        message = request.POST['message']
-        ChatMessage.objects.create(sender=request.user, recipient=recipient, message=message)
     
-    messages = ChatMessage.objects.filter(sender=request.user, recipient=recipient) | ChatMessage.objects.filter(sender=recipient, recipient=request.user)
-    messages = messages.order_by('timestamp')
+    if request.method == 'POST':
+        message = request.POST.get('message')
+        if message:
+            ChatMessage.objects.create(sender=request.user, recipient=recipient, message=message)
+    messages = ChatMessage.objects.filter(
+        models.Q(sender=request.user, recipient=recipient) |
+        models.Q(sender=recipient, recipient=request.user)
+    ).order_by('timestamp')
     
     return render(request, 'chat.html', {'recipient': recipient, 'messages': messages})
+
+def home(request):
+    return render(request, 'home.html')
