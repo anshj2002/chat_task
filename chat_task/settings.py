@@ -100,8 +100,11 @@ LOGOUT_REDIRECT_URL = '/'
 
 WSGI_APPLICATION = 'chat_task.wsgi.application'
 ASGI_APPLICATION = 'chat_task.wsgi.application'
+
 CHANNEL_LAYERS = {
     'default': {
         'BACKEND': 'channels.layers.InMemoryChannelLayer',
+        'CONFIG': {},
     },
 }
+
