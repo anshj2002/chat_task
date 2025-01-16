@@ -1,37 +1,39 @@
-<!-- base.html -->
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Chat Application{% endblock %}</title>
     {% load static %}
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
     <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
 </head>
-<body class="bg-gray-50">
-    <!-- Modern Navbar -->
-    <nav class="bg-indigo-600 text-white fixed w-full z-50 shadow-lg">
+
+<body class="bg-gradient-to-r from-blue-500 to-purple-700 font-poppins">
+
+    <!-- Modern Navbar with Background Effect -->
+    <nav class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white fixed w-full z-50 shadow-lg backdrop-blur-sm">
         <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <span class="text-xl font-bold">ChatApp</span>
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center space-x-3">
+                    <span class="text-xl font-extrabold tracking-wide text-transparent bg-clip-text bg-gradient-to-r from-yellow-400 to-indigo-500">ChatApp</span>
                 </div>
-                <div class="flex items-center space-x-4">
-                    <a href="{% url 'home' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                <div class="flex items-center space-x-6">
+                    <a href="{% url 'home' %}" class="hover:bg-indigo-700 px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-home mr-2"></i>Home
                     </a>
-                    <a href="{% url 'profile' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                    <a href="{% url 'profile' %}" class="hover:bg-indigo-700 px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-user mr-2"></i>Profile
                     </a>
-                    <a href="{% url 'user_list' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                    <a href="{% url 'user_list' %}" class="hover:bg-indigo-700 px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-comments mr-2"></i>Chat
                     </a>
-                    <a href="{% url 'support' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                    <a href="{% url 'support' %}" class="hover:bg-indigo-700 px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-headset mr-2"></i>Support
                     </a>
-                    <a href="{% url 'logout' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                    <a href="{% url 'logout' %}" class="hover:bg-indigo-700 px-4 py-2 rounded-md transition duration-300 ease-in-out transform hover:scale-105">
                         <i class="fas fa-sign-out-alt mr-2"></i>Logout
                     </a>
                 </div>
@@ -40,39 +42,41 @@
     </nav>
 
     <!-- Main Content -->
-    <div class="container mx-auto mt-20 px-4 flex min-h-screen">
-        <div class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-4 hidden md:block" id="left-menu">
-            <ul id="users-list" class="space-y-2"></ul>
+    <div class="container mx-auto mt-24 px-4 flex min-h-screen">
+        <div class="w-full md:w-1/4 bg-white rounded-lg shadow-lg p-4 mr-4 hidden md:block bg-opacity-80">
+            <ul id="users-list" class="space-y-3 text-gray-700"></ul>
         </div>
 
-        <div class="flex-1 bg-white rounded-lg shadow-lg p-6">
+        <div class="flex-1 bg-white rounded-lg shadow-lg p-6 bg-opacity-80">
             {% block content %}{% endblock %}
         </div>
 
-        <div class="w-1/4 bg-white rounded-lg shadow-lg p-4 ml-4 hidden lg:block">
-            <div class="space-y-2">
+        <div class="w-1/4 bg-white rounded-lg shadow-lg p-4 ml-4 hidden lg:block bg-opacity-80">
+            <div class="space-y-3">
                 <!-- Online users will be dynamically inserted here -->
             </div>
         </div>
     </div>
 
-    <!-- Modern Footer -->
-    <footer class="bg-gray-800 text-white py-6 mt-8">
-        <div class="max-w-7xl mx-auto px-4">
-            <div class="flex justify-between items-center">
-                <div>
-                    <p class="text-lg font-bold">ChatApp</p>
-                    <p class="text-sm">&copy; 2025 Chat Application</p>
-                </div>
-                <div class="flex space-x-4">
-                    <a href="#" class="hover:text-indigo-400"><i class="fab fa-twitter"></i></a>
-                    <a href="#" class="hover:text-indigo-400"><i class="fab fa-facebook"></i></a>
-                    <a href="#" class="hover:text-indigo-400"><i class="fab fa-instagram"></i></a>
-                </div>
+    <!-- Footer with Social Media Links -->
+    <footer class="bg-gradient-to-r from-indigo-600 to-purple-700 text-white py-4 mt-12">
+        <div class="container mx-auto text-center">
+            <p class="text-lg font-medium">© 2025 Chat Application</p>
+            <div class="mt-4">
+                <a href="#" class="text-white hover:text-gray-200 mx-2 transform transition duration-300 hover:scale-110">
+                    <i class="fab fa-facebook text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-200 mx-2 transform transition duration-300 hover:scale-110">
+                    <i class="fab fa-twitter text-2xl"></i>
+                </a>
+                <a href="#" class="text-white hover:text-gray-200 mx-2 transform transition duration-300 hover:scale-110">
+                    <i class="fab fa-instagram text-2xl"></i>
+                </a>
             </div>
         </div>
     </footer>
 
     <script src="{% static 'js/scripts.js' %}"></script>
 </body>
+
 </html>
