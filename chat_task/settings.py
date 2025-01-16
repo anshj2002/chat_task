@@ -1,5 +1,5 @@
 from pathlib import Path
-
+import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-@zf586&%_zyg5c6m7t0x@n3v%hphd)52hx^qann%+p!^dt&*&0'
@@ -20,6 +20,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'accounts',
+    'channels',
 ]
 
 MIDDLEWARE = [
@@ -37,7 +38,7 @@ ROOT_URLCONF = 'chat_task.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -50,7 +51,6 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'chat_task.wsgi.application'
 
 
 # Database
@@ -93,8 +93,15 @@ USE_TZ = True
 
 
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [os.path.join(BASE_DIR, 'accounts/static')]
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 LOGIN_REDIRECT_URL = '/'
 LOGOUT_REDIRECT_URL = '/'
 
+WSGI_APPLICATION = 'chat_task.wsgi.application'
+ASGI_APPLICATION = 'chat_task.wsgi.application'
+CHANNEL_LAYERS = {
+    'default': {
+        'BACKEND': 'channels.layers.InMemoryChannelLayer',
+    },
+}

@@ -1,55 +1,82 @@
+<!-- base.html -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}Chat Application{% endblock %}</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <style>
-        body { font-family: Arial, sans-serif; }
-        .container { display: flex; height: 100vh; }
-        .sidebar { width: 250px; background-color: #f0f0f0; padding: 10px; overflow-y: auto; }
-        .content { flex-grow: 1; padding: 20px; }
-        .user-item { cursor: pointer; padding: 10px; border-bottom: 1px solid #ccc; }
-        .user-item:hover { background-color: #e0e0e0; }
-        #chat-box { height: 400px; overflow-y: auto; border: 1px solid #ccc; padding: 10px; margin-bottom: 10px; }
-    </style>
-    {% block extra_head %}
-    {% endblock %}
+    {% load static %}
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tailwindcss/2.2.19/tailwind.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
 </head>
-<body>
-    <div class="container">
-        <div class="sidebar">
-            <h2>Users</h2>
-            <div id="userMenu"></div>
+<body class="bg-gray-50">
+    <!-- Modern Navbar -->
+    <nav class="bg-indigo-600 text-white fixed w-full z-50 shadow-lg">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <span class="text-xl font-bold">ChatApp</span>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <a href="{% url 'home' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                        <i class="fas fa-home mr-2"></i>Home
+                    </a>
+                    <a href="{% url 'profile' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                        <i class="fas fa-user mr-2"></i>Profile
+                    </a>
+                    <a href="{% url 'user_list' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                        <i class="fas fa-comments mr-2"></i>Chat
+                    </a>
+                    <a href="{% url 'support' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                        <i class="fas fa-headset mr-2"></i>Support
+                    </a>
+                    <a href="{% url 'logout' %}" class="hover:bg-indigo-700 px-3 py-2 rounded-md">
+                        <i class="fas fa-sign-out-alt mr-2"></i>Logout
+                    </a>
+                </div>
+            </div>
         </div>
-        <div class="content">
-            {% block content %}
-            {% endblock %}
+    </nav>
+
+    <!-- Main Content -->
+    <div class="container mx-auto mt-20 px-4 flex min-h-screen">
+        <div class="w-1/4 bg-white rounded-lg shadow-lg p-4 mr-4 hidden md:block" id="left-menu">
+            <button id="toggle-menu" class="w-full bg-indigo-600 text-white rounded-md py-2 mb-4 hover:bg-indigo-700">
+                <i class="fas fa-users mr-2"></i>Toggle Users
+            </button>
+            <ul id="users-list" class="space-y-2"></ul>
+        </div>
+
+        <div class="flex-1 bg-white rounded-lg shadow-lg p-6">
+            {% block content %}{% endblock %}
+        </div>
+
+        <div class="w-1/4 bg-white rounded-lg shadow-lg p-4 ml-4 hidden lg:block">
+            <h3 class="text-xl font-bold mb-4">Online Users</h3>
+            <div class="space-y-2">
+                <!-- Online users will be dynamically inserted here -->
+            </div>
         </div>
     </div>
 
-    <script>
-        // Fetch and display the list of users in the sidebar
-        fetch('/accounts/users/')
-            .then(response => response.json())
-            .then(users => {
-                const menu = document.getElementById('userMenu');
-                users.forEach(user => {
-                    const userItem = document.createElement('div');
-                    userItem.textContent = user.username;
-                    userItem.setAttribute('data-id', user.id);
-                    userItem.classList.add('user-item');
-                    menu.appendChild(userItem);
-                });
-            });
+    <!-- Modern Footer -->
+    <footer class="bg-gray-800 text-white py-6 mt-8">
+        <div class="max-w-7xl mx-auto px-4">
+            <div class="flex justify-between items-center">
+                <div>
+                    <p class="text-lg font-bold">ChatApp</p>
+                    <p class="text-sm">&copy; 2025 Chat Application</p>
+                </div>
+                <div class="flex space-x-4">
+                    <a href="#" class="hover:text-indigo-400"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="hover:text-indigo-400"><i class="fab fa-facebook"></i></a>
+                    <a href="#" class="hover:text-indigo-400"><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+        </div>
+    </footer>
 
-        document.addEventListener('click', function(event) {
-            if (event.target.classList.contains('user-item')) {
-                const recipientId = event.target.getAttribute('data-id');
-                window.location.href = `/accounts/chat/${recipientId}/`;
-            }
-        });
-    </script>
+    <script src="{% static 'js/scripts.js' %}"></script>
 </body>
 </html>
