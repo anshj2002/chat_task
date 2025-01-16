@@ -186,7 +186,10 @@ function appendMessage(data) {
     chatBox.appendChild(messageDiv);
     chatBox.scrollTop = chatBox.scrollHeight;
 }
-
+document.getElementById('toggle-chat').addEventListener('click', function() {
+    const chatPanel = document.getElementById('chat-panel');
+    chatPanel.classList.toggle('hidden'); // Toggles the 'hidden' class
+});
 // Handle user search functionality
 function setupUserSearch() {
     const searchInput = document.getElementById('searchInput');

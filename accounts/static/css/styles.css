@@ -44,10 +44,9 @@ body {
 .chat-container {
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 140px);
     background-color: white;
     border-radius: 1rem;
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 6px -1px rgba(0, 0, 0, 0.06);
     overflow: hidden;
 }
 
@@ -447,4 +446,70 @@ body {
         opacity: 1;
         transform: translateY(0);
     }
+}
+nav {
+    background: linear-gradient(to right, #4c6ef5, #6a2ff7);
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 50;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+}
+
+nav .flex {
+    display: flex;
+    justify-content: center; /* Center navbar items */
+    align-items: center;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 20px;
+    margin: 0 10px;
+    border-radius: 8px;
+    transition: background-color 0.3s, transform 0.3s;
+}
+
+nav a:hover {
+    background-color: #4a4a4a;
+    transform: scale(1.05);
+}
+
+/* Chat Panel Button */
+#toggle-chat {
+    width: 100%;
+    padding: 12px;
+    background-color: #4c6ef5;
+    color: white;
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+#toggle-chat:hover {
+    background-color: #3a5f99;
+}
+
+/* Chat Panel */
+#chat-panel {
+    display: none;
+}
+
+/* Footer Styling */
+footer {
+    background: linear-gradient(to right, #4c6ef5, #6a2ff7);
+    padding: 20px;
+    text-align: center;
+    color: #f0f0f0;
+}
+
+footer a {
+    color: white;
+    margin: 0 8px;
+    text-decoration: none;
+}
+
+footer a:hover {
+    color: #ffb400;
 }

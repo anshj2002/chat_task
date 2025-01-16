@@ -3,37 +3,40 @@
 {% block title %}User List{% endblock %}
 
 {% block content %}
-<div class="max-w-2xl mx-auto">
-    <h2 class="text-2xl font-bold mb-6 text-gray-800">Start a Conversation</h2>
+<div class="max-w-3xl mx-auto px-4 py-6">
+    <h2 class="text-3xl font-extrabold text-gray-800 text-center mb-6">Start a Conversation</h2>
     
-    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
-        <div class="p-4 bg-gray-50 border-b">
-            <input type="text" placeholder="Search users..." 
-                   class="w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                   id="searchInput">
-        </div>
+    <!-- User List Container -->
+    <div class="bg-white rounded-xl shadow-xl overflow-hidden border-t-8 border-indigo-600">
 
-        <ul class="divide-y divide-gray-200" id="usersList">
+        <!-- User List -->
+        <ul class="divide-y divide-gray-200 bg-gray-50" id="usersList">
             {% for user in users %}
-            <li class="hover:bg-gray-50 transition-colors duration-150">
+            <li class="hover:bg-gray-100 transition-colors duration-300">
                 <a href="{% url 'chat' recipient_id=user.id %}" 
-                   class="flex items-center p-4 space-x-3">
+                   class="flex items-center p-4 space-x-4">
+                    <!-- User Avatar -->
                     <img src="https://ui-avatars.com/api/?name={{ user.username }}" 
                          alt="{{ user.username }}" 
-                         class="w-10 h-10 rounded-full">
-                    <div>
-                        <h3 class="text-sm font-medium text-gray-800">{{ user.username }}</h3>
+                         class="w-14 h-14 rounded-full border-2 border-indigo-400 shadow-md">
+
+                    <div class="flex-1">
+                        <!-- Username -->
+                        <h3 class="text-lg font-medium text-gray-800">{{ user.username }}</h3>
+                        <!-- Status -->
                         <p class="text-sm text-gray-500">
                             {% if user.is_online %}
-                            <span class="inline-flex items-center">
-                                <span class="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                                Online
+                            <span class="inline-flex items-center text-green-500">
+                                <span class="w-3 h-3 bg-green-400 rounded-full mr-2"></span>Online
                             </span>
                             {% else %}
                             <span class="text-gray-400">Offline</span>
                             {% endif %}
                         </p>
                     </div>
+
+                    <!-- Chat Icon -->
+                    <i class="fas fa-comment-dots text-xl text-indigo-600"></i>
                 </a>
             </li>
             {% endfor %}
