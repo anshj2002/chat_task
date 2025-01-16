@@ -4,6 +4,7 @@
 :root {
     --primary-color: #4F46E5;
     --primary-hover: #4338CA;
+    --primary-light: rgba(79, 70, 229, 0.1);
     --secondary-color: #6B7280;
     --success-color: #10B981;
     --danger-color: #EF4444;
@@ -12,8 +13,11 @@
     --light-gray: #F3F4F6;
     --medium-gray: #E5E7EB;
     --dark-gray: #4B5563;
+    --chat-bubble-sent: linear-gradient(135deg, #4F46E5, #4338CA);
+    --chat-bubble-received: #F3F4F6;
+    --message-text-sent: #FFFFFF;
+    --message-text-received: #1F2937;
 }
-
 /* Reset and base styles */
 * {
     margin: 0;
@@ -38,27 +42,78 @@ body {
 
 
 .chat-container {
-    display: grid;
-    grid-template-columns: 250px 1fr 250px;
-    gap: 1rem;
-    margin-top: 4rem;
-    min-height: calc(100vh - 8rem);
-}
-
-/* Chat box */
-.chat-box {
-    background: white;
-    border-radius: 0.5rem;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
-    height: calc(100vh - 12rem);
+    height: calc(100vh - 140px);
+    background-color: white;
+    border-radius: 1rem;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
 }
 
-.chat-messages {
+/* Chat header */
+.chat-header {
+    display: flex;
+    align-items: center;
+    padding: 1rem 1.5rem;
+    background-color: white;
+    border-bottom: 1px solid var(--medium-gray);
+    position: relative;
+}
+
+.chat-header::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    right: 0;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--primary-color), transparent);
+    opacity: 0.5;
+}
+
+.chat-header img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2px solid var(--primary-light);
+}
+
+.chat-header h2 {
+    margin-left: 1rem;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
+
+/* Chat messages container */
+#chat-box {
     flex: 1;
     overflow-y: auto;
-    padding: 1rem;
+    padding: 1.5rem;
+    background-color: #FFFFFF;
+    background-image: 
+        radial-gradient(circle at 100% 100%, var(--primary-light) 0, transparent 40%),
+        radial-gradient(circle at 0% 0%, var(--primary-light) 0, transparent 40%);
+}
+
+/* Enhanced scrollbar */
+#chat-box::-webkit-scrollbar {
+    width: 6px;
+}
+
+#chat-box::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+#chat-box::-webkit-scrollbar-thumb {
+    background-color: rgba(107, 114, 128, 0.3);
+    border-radius: 3px;
+    transition: background-color 0.3s;
+}
+
+#chat-box::-webkit-scrollbar-thumb:hover {
+    background-color: rgba(107, 114, 128, 0.5);
 }
 
 .message {
