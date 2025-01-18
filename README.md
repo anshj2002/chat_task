@@ -110,9 +110,6 @@ ALLOWED_HOSTS=localhost,127.0.0.1
 4. Push to the branch (`git push origin feature/improvement`)
 5. Create a Pull Request
 
-## 📝 License
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
-
 ## 👤 Author
 - [anshj2002](https://github.com/anshj2002)
 
