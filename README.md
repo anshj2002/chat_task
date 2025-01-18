@@ -73,7 +73,7 @@ python manage.py runserver
 ```
 
 ## 🌐 Deployment
-The application is deployed on PythonAnywhere. You can access it at [your-pythonanywhere-link]
+The application is deployed on PythonAnywhere. You can access it at [https://anshj.pythonanywhere.com/accounts/]
 
 ## 📁 Project Structure
 ```
@@ -114,5 +114,5 @@ ALLOWED_HOSTS=localhost,127.0.0.1
 - [anshj2002](https://github.com/anshj2002)
 
 ## 🔗 Links
-- [Live Demo](your-pythonanywhere-link)
+- [Live Demo](https://anshj.pythonanywhere.com/accounts/)
 - [GitHub Repository](https://github.com/anshj2002/chat_task)
